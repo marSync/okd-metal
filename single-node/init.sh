@@ -34,7 +34,7 @@ fi
 rm -f $OC_TAR_NAME $INSTALLER_TAR_NAME
 
 # Retrieve the FCOS ISO
-ISO_URL=$(./openshift-install coreos print-stream-json | grep location | grep $ARCH | grep iso | cut -d\" -f4)
+ISO_URL=$(./openshift-install coreos print-stream-json | jq -r ".architectures.$ARCH.artifacts.metal.formats.iso.disk.location" )
 curl -L $ISO_URL -o fcos-live.iso
 
 # Generate OKD assets
