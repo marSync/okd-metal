@@ -1,0 +1,46 @@
+apiVersion: v1
+baseDomain: kube.internal
+compute:
+- name: worker
+  replicas: 0
+controlPlane:
+  name: master
+  replicas: 1
+metadata:
+  name: singleton
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.37.132.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  none: {}
+bootstrapInPlace:
+  installationDisk: /dev/sda
+pullSecret: |
+  {
+    "auths": {
+      "cloud.openshift.com": {
+        "auth": "token==",
+        "email": "marks.sunins@gmail.com"
+      },
+      "quay.io": {
+        "auth": "token==",
+        "email": "marks.sunins@gmail.com"
+      },
+      "registry.connect.redhat.com": {
+        "auth": "token==",
+        "email": "marks.sunins@gmail.com"
+      },
+      "registry.redhat.io": {
+        "auth": "token==",
+        "email": "marks.sunins@gmail.com"
+      }
+    }
+  }
+sshKey: |
+  ssh-rsa your_ssh_key_here
