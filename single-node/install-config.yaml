@@ -13,7 +13,7 @@ networking:
   - cidr: 10.128.0.0/14
     hostPrefix: 23
   machineNetwork:
-  - cidr: 10.37.132.0/24
+  - cidr: 10.211.55.0/24
   networkType: OVNKubernetes
   serviceNetwork:
   - 172.30.0.0/16
