@@ -34,13 +34,13 @@ fi
 rm -f $OC_TAR_NAME $INSTALLER_TAR_NAME
 
 # Retrieve the FCOS ISO
-ISO_URL=$(./openshift-install-fips coreos print-stream-json | jq -r ".architectures.$ARCH.artifacts.metal.formats.iso.disk.location" )
+ISO_URL=$(./openshift-install coreos print-stream-json | jq -r ".architectures.$ARCH.artifacts.metal.formats.iso.disk.location" )
 curl -L $ISO_URL -o fcos-live.iso
 
 cp ./install-config.yaml ./sno/install-config.yaml
 
 # Generate OKD assets
-./openshift-install-fips --dir=sno create single-node-ignition-config
+./openshift-install --dir=sno create single-node-ignition-config
 
 # Embed the ignition data into the FCOS ISO
 podman run --privileged --pull always --rm \
